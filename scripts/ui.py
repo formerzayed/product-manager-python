@@ -1,7 +1,7 @@
 from rich import print
 from rich.console import Console
 import time
-from rich.progress_bar import ProgressBar
+from rich.progress import Progress
 
 
 class Alerts():
@@ -35,9 +35,7 @@ class Prompt():
     def __init__(self, color):
         self.color = color
 
-    def input(self, text, new_line=True):
-        if new_line:
-            print()
+    def input(self, text):
 
         print(f"[bold {self.color}]{text} : [/bold {self.color}]", end="")
         self.inp = input()
@@ -45,7 +43,33 @@ class Prompt():
         return self.inp
 
 
-def loading():
-    console = Console()
-    bar = ProgressBar(width=100000)
-    console.print(bar)
+def loading(text):
+    print()
+    with Progress() as progress:
+        task1 = progress.add_task(f"[blue]{text}...", total=100)
+
+        while not progress.finished:
+            progress.update(task1, advance=12)
+            time.sleep(0.1)
+
+
+# def get_all_products(products):
+#     loading("Loading All Products")
+
+#     print()
+#     products = products
+
+#     table.add_column(
+#         "No.", header_style="bold red", style=f"bold {theme}")
+#     table.add_column(
+#          "Company Name", header_style="bold red", style=f"bold {theme}")
+#     table.add_column(
+#         "Product Name", header_style="bold red", style=f"bold {theme}")
+#     table.add_column("Date", header_style="bold red",
+#                             style=f"bold {theme}", no_wrap=True)
+
+#     for product in products:
+#         table.add_row(str(product.id), product.company,
+#                             product.name, str(product.date))
+
+#     console.print(table)

@@ -1,8 +1,10 @@
 from scripts.db import DB
 from scripts.ui import Menu, Alerts, Prompt, loading
-from scripts import AddProduct, ViewProduct, ViewAllProducts, exit
+from scripts import AddProduct, ViewProduct, ViewAllProducts, UpdateProduct, DeleteProduct, exit
 
-options = ["Add Product", "View Product", "View All Products", "Exit"]
+
+options = ["Add Product", "View Product", "View All Products",
+           "Update Products", "Delete Products", "Exit"]
 menu_color_scheme = ["red", "magenta", "yellow"]
 
 db = DB()
@@ -15,38 +17,60 @@ menu.options = options
 
 # Mode Setup
 add_product = AddProduct(
-    "Add Product", "This is the add product mode", "yellow")
+    "Add Product", "This is the add product mode", "blue")
 view_product = ViewProduct(
     "View Product", "This is view product mode", "red")
 view_all_products = ViewAllProducts(
-    "View All Products", "This is view all products mode", "blue")
+    "View All Products", "This is view all products mode", "green")
+update_product = UpdateProduct(
+    "Update Product", "This is update product mode", "magenta")
+delete_product = DeleteProduct(
+    "Delete Product", "This is delete product mode", "yellow")
 
 
 def main():
-    loading()
+    loading("Loading Menu")
     menu.menu()
-    choice = prompt.input("Enter your choice")
+    choice = prompt.input("\nEnter your choice")
 
     # Mode = Add Products
     if choice == "1":
+        loading(f"Loading {view_product.get_mode()} Mode")
+        view_product.mode_details()
 
-        company = prompt.input("Enter Company Name")
-        name = prompt.input("Enter Product", new_line=False)
-
-        db.add_product(company=company, name=name)
+        add_product.add_product()
 
     # Mode = View A Single Product
     elif choice == "2":
-        pass
+        loading(f"Loading {view_product.get_mode()} Mode")
+        view_product.mode_details()
+        view_product.view_product()
 
     # Mode = View all products
     elif choice == "3":
-        products = db.get_all_products()
+        loading(f"Loading {view_all_products.get_mode()} Mode")
+        view_all_products.mode_details()
 
-        view_all_products.all_products(products)
+        products = db.get_all_products()
+        view_all_products.get_all_products(products)
+
+    # Update products mode
+    elif choice == "4":
+        loading(f"Loading {update_product.get_mode()} Mode")
+        update_product.mode_details()
+        update_product.update_product()
+
+    # delete_product_mode
+    elif choice == "5":
+        loading(f"Loading {delete_product.get_mode()} Mode")
+        delete_product.mode_details()
+
+        delete_product.delete_product()
 
     # Mode = Exit
-    elif choice == "4":
+    elif choice == "6":
+        loading("Exiting...")
+        print()
         exit()
 
     else:

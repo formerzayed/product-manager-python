@@ -11,23 +11,23 @@ This is a Product Manager project created with python , it uses python , sqlalch
 Clone the project
 
 ```bash
-  git clone https://github.com/TheXurde/product-manager-python.git
+git clone https://github.com/TheXurde/product-manager-python.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd product-manager-python
+cd product-manager-python
 ```
 
 Install Requirements
 
 ```bash
-  pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Run the app
 
 ```bash
-  python app.py
+python app.py
 ```

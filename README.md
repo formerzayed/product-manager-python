@@ -11,7 +11,7 @@ This is a Product Manager project created with python , it uses python , sqlalch
 Clone the project
 
 ```bash
-git clone https://github.com/TheXurde/product-manager-python.git
+git clone https://github.com/ZayedMalick/product-manager-python.git
 ```
 
 Go to the project directory
